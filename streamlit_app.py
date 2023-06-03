@@ -60,5 +60,11 @@ def insert_row_snoflake(new_fruit):
     my_cur.execute("insert into fruit_load_list values ('" + new_fruit + "')")
     streamlit.write('Thanks for adding ', add_my_fruit)
   
-add_my_fruit = streamlit.text_input('What fruit would you like to add?')
-insert_row_snoflake(add_my_fruit)
+try:
+  add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+  if not add_my_fruit:
+    streamlit.error("Please, select a fruit to be added.")
+  else:
+    insert_row_snoflake(add_my_fruit)
+except URLError as e:
+  streamlit.error()
